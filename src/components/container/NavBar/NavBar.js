@@ -12,7 +12,7 @@ export default class NavBar extends React.Component {
   render () {
     return (
       <div>
-        <Navbar inverse collapseOnSelect bsStyle="custom" fixedTop={true}>
+        <Navbar inverse collapseOnSelect fixedTop={true}>
           <Navbar.Header>
             <Navbar.Brand>
               <a href="#brand">React-Bootstrap</a>
