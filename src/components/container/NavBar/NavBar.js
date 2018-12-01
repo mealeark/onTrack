@@ -1,11 +1,13 @@
 import React from 'react';
+import styles from './NavBar.css';
+import CssModules from 'react-css-modules';
 
-export default class NavBar extends React.Component {
+class NavBar extends React.Component {
 
   render () {
     return (
-      <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="sticky-top">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light" styleName="navBar">
           <a className="navbar-brand" href="#">Navbar</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -28,3 +30,5 @@ export default class NavBar extends React.Component {
     );
   }
 }
+
+export default CssModules(NavBar, styles);
