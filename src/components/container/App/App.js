@@ -4,7 +4,9 @@ import NavBar from '../NavBar/NavBar.js';
 export default class App extends React.Component {
   render() {
     return (
-      <NavBar />
+      <div>
+        <NavBar />
+      </div>
     );
   }
 }
