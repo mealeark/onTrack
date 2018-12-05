@@ -16,7 +16,7 @@ const Step = (props) => {
   
   const { stepColor } = divStyle;
   return (
-      <div class="col-sm">
+      <div className='col-sm'>
         <Header title={props.number + 1} style={{ ...stepColor }}/>
         <div className={cn(stepFont)}>
           {props.step}
