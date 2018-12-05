@@ -16,10 +16,9 @@ const Tutorial = (props) => {
   return (
     <div>
       <Subheader style={subheader} subheading={'How it Works'}/>
-      <div class="row">
+      <div className='row'>
       {
         steps.map((step, i) => {
-          console.log(colors[i]);
           return (<Step key={i} step={step} number={i} color={colors[i]}/>);
         })
       }
