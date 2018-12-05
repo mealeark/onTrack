@@ -1,0 +1,12 @@
+.btnStyle {
+  background-color: #0356dd;
+  border: transparent;
+  margin-top: 1em;
+  letter-spacing: 1px;
+  line-height: 15px;
+  width: 100%;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  color: white;
+}
