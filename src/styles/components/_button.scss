@@ -1,0 +1,23 @@
+.btnStyle {
+  background-color: #0356dd;
+  border: transparent;
+  margin-top: 1.0rem;
+  line-height: 3rem;
+  width: 100%;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.btnStyle__alt {
+  background-color: transparent;
+  border: 1px solid lightgrey;
+  color: black;
+}
+
+.btnStyle__alt:hover {
+  background-color: transparent;
+  border: 1px solid #0356dd;
+  color: black
+}
