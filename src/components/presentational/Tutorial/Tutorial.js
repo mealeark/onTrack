@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './Tutorial.css';
 import Subheader from '../Subheader/Subheader.js';
 import Step from '../Step/Step.js';
 
@@ -11,20 +10,20 @@ const steps = [
 
 const colors = ['#b2d8d8', '#82abed', '#eded5d'];
 
-const Tutorial = (props) => {
-  const { subheader } = styles;
-  return (
-    <div>
-      <Subheader style={subheader} subheading={'How it Works'}/>
-      <div className='row'>
-      {
-        steps.map((step, i) => {
-          return (<Step key={i} step={step} number={i} color={colors[i]}/>);
-        })
-      }
-      </div>
+const Tutorial = (props) => (
+  <div>
+    <Subheader
+      style={'subheader__tutorial__style'}
+      subheading={'How it Works'}
+    />
+    <div className='row'>
+    {
+      steps.map((step, i) => {
+        return (<Step key={i} step={step} number={i} color={colors[i]}/>);
+      })
+    }
     </div>
-  );
-};
+  </div>
+);
 
 export default Tutorial;
