@@ -19,19 +19,31 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.css$/,
-        loader: combineLoaders([
-          {
-            loader: 'style-loader'
-          }, {
-            loader: 'css-loader',
-            query: {
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
-          }
-        ]),
+        test: /\.s?css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       },
+      // {
+      //   test: /\.scss$/,
+      //   loader: combineLoaders([
+      //     {
+      //       loader: 'style-loader'
+      //     },
+      //     {
+      //       loader: 'css-loader',
+      //       query: {
+      //         modules: true,
+      //         localIdentName: '[name]__[local]___[hash:base64:5]'
+      //       }
+      //     },
+      //     {
+      //       loader: 'sass-loader'
+      //     }
+      //   ]),
+      // },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
@@ -48,11 +60,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('style.scss')
   ],
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: publicDIR
+    contentBase: publicDIR,
+    historyApiFallback: true
   }
 };
