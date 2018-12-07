@@ -1,6 +1,5 @@
 import React from 'react';
-import styles from './NavBar.css';
-import CssModules from 'react-css-modules';
+import cn from 'classnames';
 
 class NavBar extends React.Component {
 
@@ -8,14 +7,13 @@ class NavBar extends React.Component {
     return (
       <div>
         <nav 
-          className='navbar navbar-expand-lg navbar-light bg-light'
-          styleName='navBar'
+          className={cn('navbar navbar-expand-lg navbar-light bg-light', 'navBar')}
         >
-          <a className='navbar-brand' href='#'>
+          <a className='navbar-brand' href='/'>
             <img
               src={require('../../../../public/images/onTrackLogo.png')}
               alt='logo'
-              styleName='logo'
+              className='logo'
             />
           </a>
           <button 
@@ -30,19 +28,19 @@ class NavBar extends React.Component {
             <span className='navbar-toggler-icon'></span>
           </button>
           <div className='collapse navbar-collapse' id='navbarTogglerDemo02'>
+          {this.props.links && 
             <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
-              <li className='nav-item active'>
-                <a className='nav-link' href='#'>
-                  Home <span className='sr-only'>(current)</span>
-                </a>
+              <li className='nav-item'>
+                <a className='nav-link' href='#'>{this.props.links[0]}</a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='#'>Link</a>
+                <a className='nav-link' href='#'>{this.props.links[1]}</a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link disabled' href='#'>Disabled</a>
+                <a className='nav-link' href='#'>{this.props.links[2]}</a>
               </li>
             </ul>
+          }
           </div>
         </nav>
       </div>
@@ -50,4 +48,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default CssModules(NavBar, styles);
+export default NavBar;
