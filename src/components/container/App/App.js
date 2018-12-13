@@ -6,9 +6,19 @@ import Signup from '../Signup/Signup.js';
 import { Route, Switch } from 'react-router-dom';
 
 export default class App extends React.Component {
-  state = {
-    isLoggedIn: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+    };
+    this.onAuthSubmit = this.onAuthSubmit.bind(this);
   }
+
+  onAuthSubmit(logged) {
+    this.setState({isLoggedIn: logged});
+    console.log(this.state);
+  }
+
 
   render() {
     const { isLoggedIn } = this.state;
@@ -23,7 +33,16 @@ export default class App extends React.Component {
         <Switch>
           <Route exact path='/' component={Landing}/>
           <Route path='/login' component={Login}/>
-          <Route path='/sign-up' component={Signup}/>
+          <Route 
+            path='/sign-up'
+            render={(props) => (
+              <Signup
+                onSignup={this.handleSignup}
+                onAuthSubmit={this.onAuthSubmit}
+              />
+            )}
+            
+          />
         </Switch>
       </div>
     );
