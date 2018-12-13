@@ -4,10 +4,36 @@ import Form from '../../presentational/Form/Form.js';
 import Header from '../../presentational/Header/Header.js';
 import Button from '../../presentational/Button/Button.js';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const vals = ['email', 'first name', 'last name', 'password'];
+const vals = ['username', 'first name', 'last name', 'password'];
 
 class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      'username': null,
+      'password': null,
+      'first name': null,
+      'last name': null
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
+  }
+
+  handleChange(e, key) {
+    this.setState({
+      [key]:  e.target.value
+    });
+  }
+
+  handleSignup() {
+    const { username, password } = this.state;
+    axios.post('http://localhost:3000/api/signup', {username: username, password: password})
+      .then(data => { this.props.onAuthSubmit(data.data.success); })
+      .catch(err => console.error(err));
+  }
+
   render() {
     return (
       <div>
@@ -17,11 +43,11 @@ class Signup extends React.Component {
           </div>
         </div>
         <form>
-          { vals.map((el, i) => <Form value={el} placeholder={el} key={i}/>)}
+          { vals.map((el, i) => <Form value={el} placeholder={el} key={i} onChange={this.handleChange}/>)}
         </form>
         <div className='row justify-content-md-center'>
           <div className='col-sm-4'>
-            <Button buttonPhrase={'Signup'}/>
+            <Button buttonPhrase={'Signup'} onClick={this.handleSignup}/>
           </div>
         </div>
         <div className='row justify-content-md-center'>
