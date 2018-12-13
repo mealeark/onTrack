@@ -5,6 +5,7 @@ const Button = (props) => (
   <button 
     type='button'
     className={cn('btn btn-primary btn-lg', 'btnStyle', props.style)}
+    onClick={() => props.onClick()}
   >
     {props.buttonPhrase}
   </button>
