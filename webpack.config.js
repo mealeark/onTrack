@@ -1,6 +1,7 @@
 const path = require('path');
 const combineLoaders = require('webpack-combine-loaders');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 
 const publicDIR = path.join(__dirname, 'public');
 const buildDIR = path.join(__dirname, 'public/build');
@@ -59,13 +60,30 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new ExtractTextPlugin('style.scss')
-  ],
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     contentBase: publicDIR,
-    historyApiFallback: true
-  }
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    port: process.env.PORT || 8080, // Defaults to 8080
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    },
+    proxy: {
+      '^/api/*': {
+        target: 'http://localhost:3000',
+        secure: false
+      }
+    },
+  },
+  plugins: [
+    new ExtractTextPlugin('style.scss'),
+    new webpack.HotModuleReplacementPlugin({
+      multiStep: true
+    })
+  ],
 };
