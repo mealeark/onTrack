@@ -31,13 +31,13 @@ class NavBar extends React.Component {
           {this.props.links && 
             <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
               <li className='nav-item'>
-                <a className='nav-link' href='#'>{this.props.links[0]}</a>
+                <a className='nav-link' href='#'></a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='#'>{this.props.links[1]}</a>
+                <a className='nav-link' href='#'></a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' href='#'>{this.props.links[2]}</a>
+                <a className='nav-link' href='#'></a>
               </li>
             </ul>
           }
