@@ -33,12 +33,11 @@ module.exports = {
               user.password_digest = hashedPassword;
             })
             .then(() => createToken())
-            .then(token => user.token = token)
+            .then(token => { user.token = token; })
             .then(() => createUser(user))
-            .then(user => {
+            .then(() => {
               delete user.password_digest;
-              const { username } = user;
-              res.status(201).json({success: true, username});
+              res.status(201).json(user);
             })
             .catch((err) => console.error(err));
         }

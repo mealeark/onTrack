@@ -32,8 +32,9 @@ class Signup extends React.Component {
     const { username, password } = this.state;
     axios.post('http://localhost:3000/api/signup', 
       {username: username, password: password})
-      .then(data => { 
-        this.props.onAuthSubmit(data.data.success, data.data.username);
+      .then(res => { 
+        const { token } = res.data;
+        this.props.onAuthSubmit(token);
         this.clearInputs(); 
       })
       .catch(err => console.error(err));
