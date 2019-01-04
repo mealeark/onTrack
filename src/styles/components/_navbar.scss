@@ -7,3 +7,40 @@
   width: 5.5rem;
   height: 5.0rem;
 }
+
+.dropdown-toggle {
+  background-color: transparent;
+  border: transparent;
+}
+  .dropdown-toggle:hover {
+    background-color: transparent;
+  }
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: transparent;
+  border-color: transparent;
+  border: transparent;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
+.btn-group-vertical>.btn.active, .btn-group-vertical>.btn:active, .btn-group-vertical>.btn:focus, .btn-group>.btn.active, .btn-group>.btn:active, .btn-group>.btn:focus {
+  z-index: 0;
+}
+
+.dropdown-menu {
+  left: -2rem;
+  right: 0rem;
+}
+
+.fa-user-circle {
+  color: black;
+  font-size: 3.0rem;
+}
+  .fa-user-circle:hover {
+    color: red;
+    cursor: pointer;
+  }
