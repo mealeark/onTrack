@@ -25,7 +25,7 @@ module.exports = {
       .then(() => {
         if (userExist) {
           console.log('user exists: ', userExist);
-          res.json({success: false});
+          res.json({success: false, username: null});
         } else {
           hashPassword(user.password)
             .then((hashedPassword) => {
@@ -37,7 +37,8 @@ module.exports = {
             .then(() => createUser(user))
             .then(user => {
               delete user.password_digest;
-              res.status(201).json({success: true});
+              const { username } = user;
+              res.status(201).json({success: true, username});
             })
             .catch((err) => console.error(err));
         }

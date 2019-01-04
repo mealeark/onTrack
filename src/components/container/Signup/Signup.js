@@ -19,6 +19,7 @@ class Signup extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
+    this.clearInputs = this.clearInputs.bind(this);
   }
 
   handleChange(e, key) {
@@ -29,9 +30,17 @@ class Signup extends React.Component {
 
   handleSignup() {
     const { username, password } = this.state;
-    axios.post('http://localhost:3000/api/signup', {username: username, password: password})
-      .then(data => { this.props.onAuthSubmit(data.data.success); })
+    axios.post('http://localhost:3000/api/signup', 
+      {username: username, password: password})
+      .then(data => { 
+        this.props.onAuthSubmit(data.data.success, data.data.username);
+        this.clearInputs(); 
+      })
       .catch(err => console.error(err));
+  }
+
+  clearInputs() {
+    document.getElementById('form-input').reset();
   }
 
   render() {
@@ -42,8 +51,17 @@ class Signup extends React.Component {
             <Header title={'Signup'} style={{textAlign: 'center'}}/>
           </div>
         </div>
-        <form>
-          { vals.map((el, i) => <Form value={el} placeholder={el} key={i} onChange={this.handleChange}/>)}
+        <form id='form-input'>
+          { vals.map((el, i) => { 
+            return (
+              <Form
+                value={el}
+                placeholder={el}
+                key={i} 
+                onChange={this.handleChange} 
+              />
+            );
+          })}
         </form>
         <div className='row justify-content-md-center'>
           <div className='col-sm-4'>
