@@ -5,9 +5,41 @@ import Header from '../../presentational/Header/Header.js';
 import Button from '../../presentational/Button/Button.js';
 import { Link } from 'react-router-dom';
 
-const vals = ['email', 'password'];
+const vals = ['username', 'password'];
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      'username': null,
+      'password': null
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.clearInputs = this.clearInputs.bind(this);
+  }
+
+  handleChange(e, key) {
+    this.setState({
+      [key]:  e.target.value
+    });
+  }
+
+  handleLogin() {
+    const { username, password } = this.state;
+    axios.post('http://localhost:3000/api/login', 
+      {username: username, password: password})
+      .then(res => {
+        const { token } = res.data; 
+        this.props.onAuthSubmit(token);
+        this.clearInputs(); 
+      })
+      .catch(err => console.error(err));
+  }
+
+  clearInputs() {
+    document.getElementById('form-input').reset();
+  }
   render() {
     return (
       <div>

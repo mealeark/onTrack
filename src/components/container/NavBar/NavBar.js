@@ -46,7 +46,7 @@ class NavBar extends React.Component {
               </li>
             </ul>
           }
-          {this.props.username && 
+          {this.props.token && 
             <div className='btn-group'>
               <button 
                 type='button'
@@ -60,7 +60,7 @@ class NavBar extends React.Component {
                 </span>
               </button>
               <div className='dropdown-menu dropdown-menu-left'>
-                <button className='dropdown-item' type='button'>Logout</button>
+                <button className='dropdown-item' type='button' onClick={this.props.logout}>Logout</button>
               </div>
             </div>
           }

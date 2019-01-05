@@ -9,44 +9,75 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
-      username: null
+      token: null
     };
     this.onAuthSubmit = this.onAuthSubmit.bind(this);
+    this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.onLogout = this.onLogout.bind(this);
   }
 
-  onAuthSubmit(logged, username) {
+  isAuthenticated() {
+    try {
+      const json = localStorage.getItem('token');
+      const token = JSON.parse(json);
+
+      if (token) {
+        this.setState({token});
+      }
+    } catch(e) {
+      console.log('No token!');
+    }
+  }
+
+  onLogout() {
+    localStorage.removeItem('token');
     this.setState({
-      isLoggedIn: logged,
-      username
+      token: null
     });
-    console.log(username);
+
+    return (
+      <Switch>
+        <Redirect from={this.props.location.pathname} exact to='/'/>
+      </Switch>
+    );
   }
 
-  componentDidUpdate() {
-    console.log('updated!');
+  componentDidMount() {
+    this.isAuthenticated();
+  }
+
+  onAuthSubmit(token) {
+    this.setState({token});
+    localStorage.setItem('token', JSON.stringify(token));
+    console.log(token);
   }
 
   render() {
-    const { isLoggedIn, username } = this.state;
+    const { token } = this.state;
 
     return (
       <div>
-        {isLoggedIn ? 
+        {token ? 
           (
-            <NavBar links={['Link1', 'Link2', 'Link3']} username={username}/>
+            <NavBar links={['Link1', 'Link2', 'Link3']} token={token} logout={this.onLogout}/>
           ) : (
             <NavBar/>
           )
         }
         <Switch>
           <Route exact path='/' component={Landing}/>
-          <Route path='/login' component={Login}/>
+          <Route
+            path='/login'
+            render={(props) => (
+              <Login
+                onAuthSubmit={this.onAuthSubmit}
+              />
+            )}
+          />
           <Route 
             path='/sign-up'
             render={(props) => (
               <Signup
-                onSignup={this.handleSignup}
                 onAuthSubmit={this.onAuthSubmit}
               />
             )}
